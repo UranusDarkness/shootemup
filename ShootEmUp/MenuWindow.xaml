@@ -1,0 +1,47 @@
+﻿<Window x:Class="ShootEmUp.MenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShootEmUp"
+        xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
+        mc:Ignorable="d"
+        Title="Menu" WindowStartupLocation="CenterScreen" Name="mainMenuWindow" Loaded="menuWindow_Loaded" WindowState="Maximized" WindowStyle="None" KeyDown="menuWindow_KeyDown" Background="{x:Null}" Closing="mainMenuWindow_Closing">
+
+
+    <Grid Name="totalWindow">
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Image gif:AnimationBehavior.SourceUri="/Resources/Graphics/ShipBackground.gif" gif:AnimationBehavior.AutoStart="True" gif:AnimationBehavior.RepeatBehavior="1"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+        <local:MainMenu x:Name="menuControl" VerticalAlignment="Center"/>
+        <local:Rules x:Name="rulesControl" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <local:Credits x:Name="creditsControl" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <local:NotEnoughTokens x:Name="notEnoughTokens" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <local:Leaderboard x:Name="leaderboardControl" VerticalAlignment="Center" Visibility="Collapsed"/>
+
+        <MediaElement MediaFailed="bgmPlayer_MediaFailed" Name="bgmPlayer" Visibility="Collapsed" LoadedBehavior="Manual" MediaEnded="bgmPlayer_MediaEnded"/>
+
+        <Label Name="tokensLabel" Content="TOKENS: " FontFamily="OCR A Extended" FontSize="50" Foreground="Yellow" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,50,10">
+            <Label.Style>
+                <Style>
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="Label.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetProperty="Opacity">
+                                        <DoubleAnimation  Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.4" AutoReverse="True" RepeatBehavior="Forever"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+    </Grid>
+
+</Window>
